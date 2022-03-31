@@ -12,14 +12,18 @@ class TorchApp extends StatefulWidget {
 }
 
 class _TorchAppState extends State<TorchApp> {
-  String img = "bulb on";
-  String txt = "";
+  String img = "bulb off";
+  String txt = "Off";
+  Color th=Colors.black;
+  // ThemeData th=ThemeData.dark();
+  bool c=false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: c?ThemeMode.light:ThemeMode.dark,
       home: Scaffold(
         body: Container(
-          color: Colors.white,
+          color: th,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -27,16 +31,20 @@ class _TorchAppState extends State<TorchApp> {
               TextButton(
                   style: ButtonStyle(
                       overlayColor: MaterialStateColor.resolveWith(
-                          (states) => Colors.white)),
+                          (states) => c?Colors.black:Colors.white)),
                   onPressed: () {
                     setState(() {
                       if (img == "bulb on") {
+                        th=Colors.black;
                         img = "bulb off";
                         txt = "Off";
+                        c=false;
                         TorchLight.disableTorch();
                       } else {
                         img = "bulb on";
                         txt = "On";
+                        c=true;
+                        th=Colors.white;
                         TorchLight.enableTorch();
                       }
                     });
@@ -44,7 +52,7 @@ class _TorchAppState extends State<TorchApp> {
                   child: Image.asset("images/$img.png")),
               Text(
                 "Torch is $txt",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold,color: c?Colors.black:Colors.white),
               ),
             ],
           ),
