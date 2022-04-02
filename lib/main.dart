@@ -29,9 +29,9 @@ class _TorchAppState extends State<TorchApp> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
-                  style: ButtonStyle(
-                      overlayColor: MaterialStateColor.resolveWith(
-                          (states) => c?Colors.black:Colors.white)),
+                  style:ButtonStyle(
+                    splashFactory: NoSplash.splashFactory
+                  ),
                   onPressed: () {
                     setState(() {
                       if (img == "bulb on") {
@@ -86,5 +86,7 @@ class _TorchAppState extends State<TorchApp> {
 // child: Image.asset("images/$img.png")),
 // ],
 // ),
-// ),
+// ),(
+//                       overlayColor: MaterialStateColor.resolveWith(
+//                           (states) => c?Colors.black:Colors.white))
 // ),
